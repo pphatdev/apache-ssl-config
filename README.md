@@ -112,3 +112,14 @@ Goto to `C:/xampp/apache/conf/extra/httpd-vhosts.conf` file and add the followin
 
 ```
 
+## Create Domain name in Hosts
+
+Goto to `C:/Windows/System32/drivers/etc/hosts` file as administrator and add the following code:
+
+```
+127.0.0.1       localhost
+::1             localhost
+
+# Add your custom local domain
+127.0.0.1       pphat.local
+```
