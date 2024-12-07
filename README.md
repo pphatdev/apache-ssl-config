@@ -123,3 +123,14 @@ Goto to `C:/Windows/System32/drivers/etc/hosts` file as administrator and add th
 # Add your custom local domain
 127.0.0.1       pphat.local
 ```
+## Import the certificate to Windows trust store
+Open powershell as administrator and run the following command:
+
+```sh
+$cert = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2("C:\xampp\apache\conf\ssl.crt\pphat.local.crt")
+$store = New-Object System.Security.Cryptography.X509Certificates.X509Store("Root","LocalMachine")
+$store.Open("ReadWrite")
+$store.Add($cert)
+$store.Close()
+```
+After completing these steps, you should be able to access your local domain with SSL/HTTPS.
