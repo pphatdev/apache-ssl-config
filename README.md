@@ -42,3 +42,73 @@ After that, run:
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout C:/xampp/apache/conf/ssl.key/pphat.local.key -out C:/xampp/apache/conf/ssl.crt/pphat.local.crt -config pphat.local.cnf
 ```
 to generate the certificate. after that, you will see the certificate in `C:/xampp/apache/conf/conf/ssl.crt` folder and key in `C:/xampp/apache/conf/ssl.key` folder.
+
+
+## Configure Apache Virtual Host
+
+Goto to `C:/xampp/apache/conf/extra/httpd-vhosts.conf` file and add the following code:
+
+### Without SSL
+
+```conf
+
+# Without SSL
+# Example for pphat.local
+ <VirtualHost pphat.local:80>
+
+    # Server Name
+    ServerName pphat.local
+
+    # Document Root Path (using laravel project)
+    DocumentRoot "D:/Project/laravel/blog-post/public"
+
+    ErrorLog "logs/pphat.local-error.log"
+    CustomLog "logs/pphat.local-access.log" common
+
+    # Directory Permission
+    <Directory "D:/Project/laravel/blog-post/public">
+        Options Indexes FollowSymLinks MultiViews
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+
+```
+
+### Directly With SSL
+
+```conf
+# With SSL
+# Example for pphat.local
+<VirtualHost pphat.local:80>
+    # Redirect to HTTPS
+    Redirect permanent / https://pphat.local/
+</VirtualHost>
+
+
+# With SSL
+<VirtualHost pphat.local:443>
+
+    # Server Name
+    ServerName pphat.local
+    # Server Alias
+    ServerAlias pphat.local
+
+    # Document Root Path
+    DocumentRoot "D:/Project/laravel/blog-post/public"
+
+    # SSL Options
+    SSLEngine on
+    SSLCertificateFile "C:/xampp/apache/conf/ssl.crt/pphat.local.crt"
+    SSLCertificateKeyFile "C:/xampp/apache/conf/ssl.key/pphat.local.key"
+
+    # Directory Permission
+    <Directory "D:/Project/laravel/blog-post/public">
+        Options Indexes FollowSymLinks MultiViews
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+
+```
+
