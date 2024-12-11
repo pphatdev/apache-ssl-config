@@ -1,0 +1,20 @@
+# Without SSL
+# Example for pphatdev.local
+ <VirtualHost pphatdev.local:80>
+
+    # Server Name
+    ServerName pphatdev.local
+
+    # Document Root Path (using laravel project)
+    DocumentRoot "D:/Project/laravel/blog-post/public"
+
+    ErrorLog "logs/pphatdev.local-error.log"
+    CustomLog "logs/pphatdev.local-access.log" common
+
+    # Directory Permission
+    <Directory "D:/Project/laravel/blog-post/public">
+        Options Indexes FollowSymLinks MultiViews
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
