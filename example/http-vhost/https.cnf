@@ -1,0 +1,31 @@
+# With SSL
+# Example for pphatdev.local
+<VirtualHost pphatdev.local:80>
+    # Redirect to HTTPS
+    Redirect permanent / https://pphatdev.local/
+</VirtualHost>
+
+
+# With SSL
+<VirtualHost pphatdev.local:443>
+
+    # Server Name
+    ServerName pphatdev.local
+    # Server Alias
+    ServerAlias pphatdev.local
+
+    # Document Root Path
+    DocumentRoot "D:/Project/laravel/blog-post/public"
+
+    # SSL Options
+    SSLEngine on
+    SSLCertificateFile "C:/xampp/apache/conf/ssl.crt/pphatdev.local.crt"
+    SSLCertificateKeyFile "C:/xampp/apache/conf/ssl.key/pphatdev.local.key"
+
+    # Directory Permission
+    <Directory "D:/Project/laravel/blog-post/public">
+        Options Indexes FollowSymLinks MultiViews
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
